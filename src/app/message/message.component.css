@@ -1,0 +1,7 @@
+.message {
+    display: flex;
+}
+
+.message p {
+    margin: 2px 2px 2px 2px;
+}
