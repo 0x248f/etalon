@@ -15,26 +15,34 @@ export interface JesiMessage {
   providedIn: 'root'
 })
 export class JesiService {
-  private socket$: WebSocketSubject<any> = webSocket({
+  private socket$: WebSocketSubject<string> = webSocket<string>({
     url: 'ws://localhost:4222',
-    deserializer: msg => msg
+    deserializer: msg => msg.data,
+    serializer: msg => msg
   });
-  public messages$ = new Subject<JesiMessage>();
+  public message$ = new Subject<JesiMessage>();
+
+  private nickname: {[key: string]: string} = {};
+
   constructor() {
-    this.socket$.subscribe((message: MessageEvent<any>) => {
-      let jm: JesiMessage | null = this.parseMessage(message.data);
+    this.socket$.subscribe((value: string) => {
+      let jm: JesiMessage | null = this.parseMessage(value);
       if (jm === null)
         return;
       
-      this.messages$.next(jm);
+      this.message$.next(jm);
+
+      if (jm.command == 'NICK')
+        this.nickname[jm.server] = jm.user;
     });
   }
   send(text: string) {
     this.socket$.next(text);
-    let jm = this.parseMessage(text);
+    /*let jm = this.parseMessage(text);
     if (jm === null)
       return;
-    this.messages$.next(jm);
+    jm.user = this.nickname[jm.server];
+    this.message$.next(jm);*/
   }
   close() {
     this.socket$.complete();
@@ -46,7 +54,7 @@ export class JesiService {
     let m = message.trim().match(/^([A-Z]+)\s+\'(.+)\'(?:\.(#[^\.\s]+))?(?:\.([^\.\s]+))?(?:\s*\|\s*(.+))?$/);
     if (m)
       return {
-        'time': date.getHours() + ':' + date.getMinutes(),
+        'time': date.toLocaleTimeString('ca'),
         'command': m[1],
         'server': m[2],
         'channel': m[3],

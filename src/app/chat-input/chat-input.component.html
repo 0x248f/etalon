@@ -1,2 +1,2 @@
-<input type="text" name="chatInput" #chatInput/>
-<input type="button" value="send" (click)="send(chatInput.value)"/>
+<input #textInput (keyup.enter)="send(textInput.value); textInput.value = ''"/>
+<input type="button" value="send" (click)="send(textInput.value); textInput.value = ''"/>
