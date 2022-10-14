@@ -1,0 +1,8 @@
+<div class="serverList">
+  <div *ngFor="let server of servers">
+    <etl-server-entry [server]="server"></etl-server-entry>
+    <div *ngFor="let buffer of buffers[server]">
+      <etl-buffer-entry [server]="server" [buffer]="buffer"></etl-buffer-entry>
+    </div>
+  </div>
+</div>

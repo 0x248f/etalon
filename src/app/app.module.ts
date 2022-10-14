@@ -6,6 +6,9 @@ import { ChatViewComponent } from './chat-view/chat-view.component';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { ChatInputComponent } from './chat-input/chat-input.component';
 import { MessageComponent } from './message/message.component';
+import { ServerListComponent } from './server-list/server-list.component';
+import { ServerEntryComponent } from './server-entry/server-entry.component';
+import { BufferEntryComponent } from './buffer-entry/buffer-entry.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { MessageComponent } from './message/message.component';
     ChatViewComponent,
     ChatAreaComponent,
     ChatInputComponent,
-    MessageComponent
+    MessageComponent,
+    ServerListComponent,
+    ServerEntryComponent,
+    BufferEntryComponent
   ],
   imports: [
     BrowserModule

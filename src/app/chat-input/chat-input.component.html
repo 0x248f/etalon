@@ -1,2 +1,5 @@
-<input #textInput (keyup.enter)="send(textInput.value); textInput.value = ''"/>
-<input type="button" value="send" (click)="send(textInput.value); textInput.value = ''"/>
+<input #textInput
+  (keyup.enter)="send(textInput)"
+  (keyup.arrowup)="historyUp(textInput)"
+  (keyup.arrowdown)="historyDown(textInput)"/>
+<input type="button" value="send" (click)="send(textInput)"/>

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component } from '@angular/core';
 import { JesiMessage, JesiService } from '../jesi.service';
 
 @Component({
@@ -7,13 +6,12 @@ import { JesiMessage, JesiService } from '../jesi.service';
   templateUrl: './chat-area.component.html',
   styleUrls: ['./chat-area.component.css']
 })
-export class ChatAreaComponent implements OnInit {
+export class ChatAreaComponent {
   messages: JesiMessage[] = [];
   constructor(public jesi: JesiService) {
-  }
-  ngOnInit() {
     this.jesi.message$.subscribe(this.addMessage.bind(this));
   }
+
   addMessage(message: JesiMessage) {
     console.log(message);
     if (!this.messages)
