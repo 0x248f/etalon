@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { JesiService, JesiMessage } from '../jesi.service';
+import { BufferEntry } from '../buffer-entry/buffer-entry.component';
 
 @Component({
   selector: 'etl-server-list',
@@ -9,6 +10,7 @@ import { JesiService, JesiMessage } from '../jesi.service';
 export class ServerListComponent {
   servers: string[] = [];
   buffers: {[server: string]: string[]} = {};
+  @Output() selectedEvent = new EventEmitter<BufferEntry>();
   constructor(public jesi: JesiService) {
     jesi.message$.subscribe((message: JesiMessage) => {
       if (message.command === 'CONNECT') {
@@ -24,4 +26,7 @@ export class ServerListComponent {
     });
   }
 
+  bufferSelected(bufferEntry: BufferEntry) {
+    this.selectedEvent.emit(bufferEntry);
+  }
 }

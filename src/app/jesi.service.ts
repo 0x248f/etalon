@@ -23,8 +23,6 @@ export class JesiService {
   public message$ = new Subject<JesiMessage>();
 
   private nickname: {[key: string]: string} = {};
-  currentBuffer: string = '';
-  currentServer: string = '';
 
   constructor() {
     this.socket$.subscribe((value: string) => {

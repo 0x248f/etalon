@@ -1,8 +1,12 @@
 <div class="serverList">
   <div *ngFor="let server of servers">
-    <etl-server-entry [server]="server"></etl-server-entry>
+    <etl-server-entry
+      [server]="server"
+      (selectedEvent)="bufferSelected($event)"></etl-server-entry>
     <div *ngFor="let buffer of buffers[server]">
-      <etl-buffer-entry [server]="server" [buffer]="buffer"></etl-buffer-entry>
+      <etl-buffer-entry
+        [bufferEntry]="{server: server, name: buffer}"
+        (selectedEvent)="bufferSelected($event)"></etl-buffer-entry>
     </div>
   </div>
 </div>

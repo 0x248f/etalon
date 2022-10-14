@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BufferEntry } from '../buffer-entry/buffer-entry.component';
 import { JesiService } from '../jesi.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { JesiService } from '../jesi.service';
   styleUrls: ['./chat-input.component.css']
 })
 export class ChatInputComponent {
+  @Input() bufferEntry: BufferEntry | undefined;
   history: string[] = [];
   historyIndex: number = 0;
   constructor(private jesi: JesiService) { }

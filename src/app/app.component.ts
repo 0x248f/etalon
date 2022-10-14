@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BufferEntry } from './buffer-entry/buffer-entry.component';
 
 @Component({
   selector: 'etl-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'etalon';
+  bufferEntry: BufferEntry | undefined;
+
+  bufferSelected(bufferEntry: BufferEntry) {
+    this.bufferEntry = bufferEntry;
+  }
 }

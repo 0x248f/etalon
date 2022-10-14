@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BufferEntry } from '../buffer-entry/buffer-entry.component';
 
 @Component({
   selector: 'etl-chat-view',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-view.component.css']
 })
 export class ChatViewComponent implements OnInit {
-
+  @Input() bufferEntry: BufferEntry | undefined;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BufferEntry } from '../buffer-entry/buffer-entry.component';
 
 @Component({
   selector: 'etl-server-entry',
@@ -7,5 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ServerEntryComponent {
   @Input() server: string = '';
+  @Output() selectedEvent = new EventEmitter<BufferEntry>();
   constructor() { }
+
+  serverSelected() {
+    this.selectedEvent.emit({server: this.server, name: ''});
+  }
 }
