@@ -14,7 +14,24 @@ export class ChatInputComponent {
   constructor(private jesi: JesiService) { }
 
   send(textInput: HTMLInputElement) {
-    this.jesi.send(textInput.value);
+    if (!this.bufferEntry)
+      return;
+
+    let msg = '';
+    let server = this.bufferEntry.server;
+    let name = this.bufferEntry.name;
+    if (name) {
+      msg = `SEND '${server}'.${name} | ${textInput.value}`;
+    } else {
+      let words = textInput.value.split(' ');
+      if (words[0] === 'JOIN')
+        msg = `JOIN '${server}'.${words[1]}`;
+      else
+        msg = `${words[0]} ${server} | ${words.slice(1).join(' ')}`;
+    }
+    console.log(msg);
+    this.jesi.send(msg);
+
     this.historyIndex = this.history.length + 1;
     this.history.push(textInput.value);
     textInput.value = '';
